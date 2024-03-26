@@ -1,0 +1,30 @@
+name: conv1d
+version: 1.0.0
+kind: ecu # Executable Code Unit
+
+description:
+
+contributors:
+
+dependencies:
+  - python3
+  - python3-pip
+
+files:
+  - requirements.txt
+  - conv1d.py
+
+postinstall:
+- pip3 install -r requirements.txt
+
+entrypoint:
+  kind: task
+  exec: conv1d.py
+
+actions:
+  'conv1d':
+    command:
+    input:
+    output:
+    - type: IntermediateResult
+      name: result
