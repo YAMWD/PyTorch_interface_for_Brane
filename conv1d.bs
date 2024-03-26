@@ -1,0 +1,11 @@
+import conv1d;
+
+println("conv1d started!");
+
+let result := conv1d();
+
+println("done");
+
+commit_result("conv1d", result);
+
+println("conv1d results committed!");
