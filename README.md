@@ -1,1 +1,1 @@
-# PyTorch_interface_for_Brane
+# PyTorch interface for Brane
