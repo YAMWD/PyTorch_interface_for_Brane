@@ -36,6 +36,16 @@ actions:
       name: inputs
     - type: string
       name: weights
+    - type: string
+      name: bias
+    - type: int
+      name: stride
+    - type: int
+      name: padding
+    - type: int
+      name: dilation
+    - type: int
+      name: groups
     output:
     - type: IntermediateResult
       name: result
@@ -49,6 +59,16 @@ actions:
       name: inputs
     - type: string
       name: weights
+    - type: string
+      name: bias
+    - type: int
+      name: stride
+    - type: int
+      name: padding
+    - type: int
+      name: dilation
+    - type: int
+      name: groups
     output:
     - type: IntermediateResult
       name: result
