@@ -6,44 +6,50 @@ import numpy as np
 import yaml
 import sys
 import os
+import json
 
-def readTensor(filepath):
+def conv1d(inputs_path, weights_path):
+      
+    inputs = torch.load(inputs_path)
+    weights = torch.load(weights_path)
 
-	# result = torch.load(filepath)
+    result = F.conv1d(inputs, weights)
 
-	result = filepath
+    filepath = 'result.pt'
+    torch.save(result, filepath)
+    
+    return filepath
 
-	return result
+def conv2d(inputs_path, weights_path):
+      
+    inputs = torch.load(inputs_path)
+    weights = torch.load(weights_path)
 
-def conv1d(inputs, weights):
-	result = F.conv1d(inputs, weights)
+    result = F.conv2d(inputs, weights)
 
-	return result
+    filepath = 'result.pt'
+    torch.save(result, filepath)
+
+    return filepath
 
 def main():
     # Make sure that at least one argument is given
-	'''
-    if len(sys.argv) != 2 or (sys.argv[1] != "readTensor" and sys.argv[1] != "conv1d"):
-        print(f"Usage: {sys.argv[0]} readTensor | conv1d")
+    if len(sys.argv) != 2 or (sys.argv[1] != "conv1d" and sys.argv[1] != "conv2d"):
+        print(f"Usage: {sys.argv[0]} conv1d | conv2d")
         exit(1)
-	'''
 
     # If it checks out, call the appropriate function
     command = sys.argv[1]
-    if command == "readTensor":
-        # Parse the input as JSON, then pass that to the `read_tensor` function
-        inputs = json.loads(os.environ["INPUTS"])
-        result = readTensor(inputs)
-
-	'''
-    else:
+    if command == "conv1d":
         # Parse the input as JSON, then pass that to the `conv1d` function
-        inputs = json.loads(os.environ["INPUTS"])
-        weights = json.loads(os.environ["WEIGHTS"])
-        result = conv1d(inputs, weights)
-	'''
-    # Print the result with the YAML package
-    print(yaml.dump({ "output": result }))
+        inputs_path = json.loads(os.environ["INPUTS"])
+        weights_path = json.loads(os.environ["WEIGHTS"])
+        result = conv1d(inputs_path, weights_path)
+    else:
+        # Parse the input as JSON, then pass that to the `conv2d` function
+        inputs_path = json.loads(os.environ["INPUTS"])
+        weights_path = json.loads(os.environ["WEIGHTS"])
+        result = conv2d(inputs_path, weights_path)
 
 if __name__ == '__main__':
 	main()

@@ -13,6 +13,11 @@ dependencies:
 files:
   - requirements.txt
   - code.py
+  # pt data files containing inputs and weights tensor
+  - inputs_conv1d.pt
+  - weights_conv1d.pt
+  - inputs_conv2d.pt
+  - weights_conv2d.pt
 
 postinstall:
 - pip3 install -r requirements.txt
@@ -22,26 +27,28 @@ entrypoint:
   exec: code.py
 
 actions:
-  readTensor:
+  conv1d:
     command:
       args:
-      - readTensor
+      - conv1d
     input:
     - type: string
       name: inputs
-    output:
     - type: string
+      name: weights
+    output:
+    - type: IntermediateResult
       name: result
 
-#  'conv1d':
-#    command:
-#      args:
-#      - conv1d
-#    input:
-#    - type: IntermediateResult
-#      name: inputs
-#    - type: IntermediateResult
-#      name: weights
-#    output:
-#    - type: IntermediateResult
-#      name: result
+  conv2d:
+    command:
+      args:
+      - conv2d
+    input:
+    - type: string
+      name: inputs
+    - type: string
+      name: weights
+    output:
+    - type: IntermediateResult
+      name: result
