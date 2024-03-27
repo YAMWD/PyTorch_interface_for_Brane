@@ -2,10 +2,15 @@ import torch;
 
 let inputs_path := "inputs_conv1d.pt";
 let weights_path := "weights_conv1d.pt";
+let bias_path := "None";
+let stride := 1;
+let padding := 0;
+let dilation := 1;
+let groups := 1;
 
 println("start conv1d computation");
 
-let result := conv1d(inputs_path, weights_path);
+let result := conv1d(inputs_path, weights_path, bias_path, stride, padding, dilation, groups);
 
 println("done");
 

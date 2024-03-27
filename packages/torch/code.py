@@ -8,24 +8,34 @@ import sys
 import os
 import json
 
-def conv1d(inputs_path, weights_path):
+def conv1d(inputs_path, weights_path, bias = "None", stride = 1, padding = 0, dilation = 1, groups = 1):
       
     inputs = torch.load(inputs_path)
     weights = torch.load(weights_path)
 
-    result = F.conv1d(inputs, weights)
+    if bias == "None":
+        bias = None
+    else:
+        bias = torch.load(bias)
+
+    result = F.conv1d(inputs, weights, bias = bias, stride = stride, padding = padding, dilation = dilation, groups = groups)
 
     filepath = 'result.pt'
     torch.save(result, filepath)
-    
+
     return filepath
 
-def conv2d(inputs_path, weights_path):
+def conv2d(inputs_path, weights_path, bias = "None", stride = 1, padding = 0, dilation = 1, groups = 1):
       
     inputs = torch.load(inputs_path)
     weights = torch.load(weights_path)
 
-    result = F.conv2d(inputs, weights)
+    if bias == "None":
+        bias = None
+    else:
+        bias = torch.load(bias)
+
+    result = F.conv2d(inputs, weights, bias = bias, stride = stride, padding = padding, dilation = dilation, groups = groups)
 
     filepath = 'result.pt'
     torch.save(result, filepath)
@@ -44,12 +54,22 @@ def main():
         # Parse the input as JSON, then pass that to the `conv1d` function
         inputs_path = json.loads(os.environ["INPUTS"])
         weights_path = json.loads(os.environ["WEIGHTS"])
-        result = conv1d(inputs_path, weights_path)
+        bias_path = json.loads(os.environ["BIAS"])
+        stride = json.loads(os.environ["STRIDE"])
+        padding = json.loads(os.environ["PADDING"])
+        dilation = json.loads(os.environ["DILATION"])
+        groups = json.loads(os.environ["GROUPS"])
+        result = conv1d(inputs_path, weights_path, bias_path, stride, padding, dilation, groups)
     else:
         # Parse the input as JSON, then pass that to the `conv2d` function
         inputs_path = json.loads(os.environ["INPUTS"])
         weights_path = json.loads(os.environ["WEIGHTS"])
-        result = conv2d(inputs_path, weights_path)
+        bias_path = json.loads(os.environ["BIAS"])
+        stride = json.loads(os.environ["STRIDE"])
+        padding = json.loads(os.environ["PADDING"])
+        dilation = json.loads(os.environ["DILATION"])
+        groups = json.loads(os.environ["GROUPS"])
+        result = conv2d(inputs_path, weights_path, bias_path, stride, padding, dilation, groups)
 
 if __name__ == '__main__':
 	main()
