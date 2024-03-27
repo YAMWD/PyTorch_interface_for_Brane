@@ -1,11 +1,16 @@
-import conv1d;
+import torch;
 
-println("conv1d started!");
+let inputs_path := "inputs_conv1d.pt";
+let weights_path := "weights_conv1d.pt";
 
-let result := conv1d();
+println("start conv1d computation");
+
+let result := conv1d(inputs_path, weights_path);
 
 println("done");
 
 commit_result("conv1d", result);
 
-println("conv1d results committed!");
+println("conv1d results committed");
+
+return;

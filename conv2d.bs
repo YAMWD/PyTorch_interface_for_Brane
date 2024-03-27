@@ -1,0 +1,16 @@
+import torch;
+
+let inputs_path := "inputs_conv2d.pt";
+let weights_path := "weights_conv2d.pt";
+
+println("start conv2d computation");
+
+let result := conv2d(inputs_path, weights_path);
+
+println("done");
+
+commit_result("conv2d", result);
+
+println("conv2d results committed");
+
+return;
