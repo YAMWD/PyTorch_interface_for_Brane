@@ -1,11 +1,25 @@
 import conv1d;
 
-println("conv1d started!");
+println("reading tensors");
 
-let result := conv1d();
+let inputs := readTensor("./pacakges/data/inputs_conv1d.pt");
+let weights := readTensor("./pacakges/data/weights_conv1d.pt");
+
+println("tensors read");
+
+commit_result("inputs", inputs);
+commit_result("weights", weights);
+
+println("tensors committed");
+
+println("start conv1d computation");
+
+let result := conv1d(inputs, weights);
 
 println("done");
 
 commit_result("conv1d", result);
 
-println("conv1d results committed!");
+println("conv1d results committed");
+
+return;
