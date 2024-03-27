@@ -1,20 +1,11 @@
-import conv1d;
+import torch;
 
-println("reading tensors");
-
-let inputs := readTensor("./pacakges/data/inputs_conv1d.pt");
-let weights := readTensor("./pacakges/data/weights_conv1d.pt");
-
-println("tensors read");
-
-commit_result("inputs", inputs);
-commit_result("weights", weights);
-
-println("tensors committed");
+let inputs_path := "inputs_conv1d.pt";
+let weights_path := "weights_conv1d.pt";
 
 println("start conv1d computation");
 
-let result := conv1d(inputs, weights);
+let result := conv1d(inputs_path, weights_path);
 
 println("done");
 
