@@ -18,10 +18,14 @@ files:
   - weights_conv1d.pt
   - inputs_conv2d.pt
   - weights_conv2d.pt
+  - inputs_conv3d.pt
+  - weights_conv3d.pt
   - inputs_transpose1d.pt
   - weights_transpose1d.pt
   - inputs_transpose2d.pt
   - weights_transpose2d.pt
+  - inputs_transpose3d.pt
+  - weights_transpose3d.pt
 
 postinstall:
 - pip3 install -r requirements.txt
@@ -77,6 +81,29 @@ actions:
     - type: IntermediateResult
       name: result
 
+  conv2d:
+    command:
+      args:
+      - conv3d
+    input:
+    - type: string
+      name: inputs
+    - type: string
+      name: weights
+    - type: string
+      name: bias
+    - type: int
+      name: stride
+    - type: int
+      name: padding
+    - type: int
+      name: dilation
+    - type: int
+      name: groups
+    output:
+    - type: IntermediateResult
+      name: result
+
   conv_transpose1d:
     command:
       args:
@@ -103,6 +130,31 @@ actions:
       name: result
 
   conv_transpose2d:
+    command:
+      args:
+      - conv_transpose2d
+    input:
+    - type: string
+      name: inputs
+    - type: string
+      name: weights
+    - type: string
+      name: bias
+    - type: int
+      name: stride
+    - type: int
+      name: padding
+    - type: int
+      name: output_padding
+    - type: int
+      name: groups
+    - type: int
+      name: dilation
+    output:
+    - type: IntermediateResult
+      name: result
+
+  conv_transpose3d:
     command:
       args:
       - conv_transpose2d
