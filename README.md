@@ -4,6 +4,7 @@ This project features an implementation of an interface for some Pytorch functio
 # Build 
 To build the brane package, user can nevigate to the package/torch directory and run the following command.
 ```
+cd package/torch
 brane build container.yml
 ```
 
