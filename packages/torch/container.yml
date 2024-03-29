@@ -81,7 +81,7 @@ actions:
     - type: IntermediateResult
       name: result
 
-  conv2d:
+  conv3d:
     command:
       args:
       - conv3d
@@ -157,7 +157,7 @@ actions:
   conv_transpose3d:
     command:
       args:
-      - conv_transpose2d
+      - conv_transpose3d
     input:
     - type: string
       name: inputs

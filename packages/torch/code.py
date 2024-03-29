@@ -103,7 +103,7 @@ def conv_transpose3d(inputs_path, weights_path, bias = "None", stride = 1, paddi
     else:
         bias = torch.load(bias)
 
-    result = F.conv_transpose2d(inputs, weights, bias = bias, stride = stride, padding = padding, output_padding = output_padding, groups = groups, dilation = dilation)
+    result = F.conv_transpose3d(inputs, weights, bias = bias, stride = stride, padding = padding, output_padding = output_padding, groups = groups, dilation = dilation)
 
     filepath = 'result.pt'
     torch.save(result, filepath)
@@ -147,7 +147,7 @@ def main():
         padding = json.loads(os.environ["PADDING"])
         dilation = json.loads(os.environ["DILATION"])
         groups = json.loads(os.environ["GROUPS"])
-        result = conv2d(inputs_path, weights_path, bias_path, stride, padding, dilation, groups)
+        result = conv3d(inputs_path, weights_path, bias_path, stride, padding, dilation, groups)
     elif command == "conv_transpose1d":
         # Parse the input as JSON, then pass that to the 'conv_transpose1d' function
         inputs_path = json.loads(os.environ["INPUTS"])
@@ -180,7 +180,7 @@ def main():
         output_padding = json.loads(os.environ["OUTPUT_PADDING"])
         groups = json.loads(os.environ["GROUPS"])
         dilation = json.loads(os.environ["DILATION"])
-        result = conv_transpose2d(inputs_path, weights_path, bias_path, stride, padding, output_padding, groups, dilation)
+        result = conv_transpose3d(inputs_path, weights_path, bias_path, stride, padding, output_padding, groups, dilation)
 
 
 if __name__ == '__main__':
