@@ -1,0 +1,22 @@
+import torch;
+
+let inputs_path := "inputs_transpose3d.pt";
+let weights_path := "weights_transpose3d.pt";
+let bias_path := "None";
+let stride := 1;
+let padding := 0;
+let output_padding := 0;
+let groups := 1;
+let dilation := 1;
+
+println("start conv_tranpose3d computation");
+
+let result := conv_transpose3d(inputs_path, weights_path, bias_path, stride, padding, output_padding, groups, dilation);
+
+println("done");
+
+commit_result("conv_transpose3d", result);
+
+println("conv_transpose3d results committed");
+
+return;
